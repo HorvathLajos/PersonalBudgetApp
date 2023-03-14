@@ -4,7 +4,9 @@
     <attachedFolders>
       <Path>personal-budget-app</Path>
     </attachedFolders>
-    <explicitIncludes />
+    <explicitIncludes>
+      <Path>README.md</Path>
+    </explicitIncludes>
     <explicitExcludes />
   </component>
 </project>

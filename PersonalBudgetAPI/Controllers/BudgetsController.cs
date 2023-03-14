@@ -57,6 +57,7 @@ namespace PersonalBudgetAPI.Controllers
             var budgetUpdate = _context.Budget.FirstOrDefault(bud => bud.BudgetId == id);
             if (budgetUpdate == null) return null;
             if (request.TotalAmount != null) budgetUpdate.TotalAmount = request.TotalAmount;
+            if (request.BudgetName != null) budgetUpdate.BudgetName = request.BudgetName;
             if (request.UserId != null)
             {
                 var user = _context.User.FirstOrDefault(user => user.UserId == request.UserId);
