@@ -1,0 +1,43 @@
+.BudgetTableCell {
+    font-size: 0.8em;
+    text-align: center;
+}
+.BudgetTableCellMain {
+    font-size: 1em;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.TableContainer {
+    height: 100vh;
+    min-width: 320px;
+}
+.TableContainerTable {
+    border-collapse: collapse;
+}
+img {
+    max-width: 40px;
+    margin-left: 5px;
+}
+.MyPointer {
+    cursor: grab;
+}
+
+
+@media only screen and (min-width: 400px) {
+    .BudgetTableCell {
+        font-size: 1em;
+    }
+    .BudgetTableCellMain {
+        font-size: 1.2em;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .BudgetTableCell {
+        font-size: 1.2em;
+    }
+    .BudgetTableCellMain {
+        font-size: 1.4em;
+    }
+}

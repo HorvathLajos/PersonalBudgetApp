@@ -22,6 +22,8 @@ export type BudgetListProps = {
     budgets? :Budget[],
     openedBudgetIds?: number[],
     setOpenedBudgetIds?: React.Dispatch<React.SetStateAction<number[] | undefined>>
+    deleteTransaction?: (transactionId : number) => void
+    deleteBudget?: (budgetId : number) => void
 };
 export type MyTableRow = {
     budgetId: number,
@@ -32,10 +34,19 @@ export type MyTableRow = {
 export type AddTransactionProps = {
     AddTransaction :(budgetId :number, request :BudgetTransactionUpdateRequest) => void
 };
+export type AddBudgetProps = {
+    AddBudget :(request :BudgetAddRequest) => void
+};
 export type BudgetTransactionUpdateRequest = {
     transactionData : Date,
     transactionDesc? : string,
     transactionAmount : number,
     valid : boolean,
     budgetId : number
-}
+};
+export type BudgetAddRequest = {
+    budgetName :string,
+    totalAmount :number
+    userId :number,
+    transactions :Transaction[]
+};
