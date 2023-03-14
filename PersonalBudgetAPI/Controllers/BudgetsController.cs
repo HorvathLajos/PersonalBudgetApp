@@ -39,7 +39,7 @@ namespace PersonalBudgetAPI.Controllers
         }
         
         [HttpGet("/Budgets/User/{id}")]
-        public async Task<ActionResult<IEnumerable<Budget>>> GetBudgetByUser(int id)
+        public async Task<ActionResult<IEnumerable<Budget>>> GetBudgetsByUser(int id)
         {
             if (_context.Budget == null) return NotFound();
             var budgets = await _context.Budget
@@ -51,23 +51,23 @@ namespace PersonalBudgetAPI.Controllers
             return Ok(budgets);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBudget(int id, [FromBody] BudgetUpdateRequest request)
-        {
-            var budgetUpdate = _context.Budget.FirstOrDefault(bud => bud.BudgetId == id);
-            if (budgetUpdate == null) return null;
-            if (request.TotalAmount != null) budgetUpdate.TotalAmount = request.TotalAmount;
-            if (request.BudgetName != null) budgetUpdate.BudgetName = request.BudgetName;
-            if (request.UserId != null)
-            {
-                var user = _context.User.FirstOrDefault(user => user.UserId == request.UserId);
-                if (user == null) return NotFound("User not found");
-                budgetUpdate.UserId = user.UserId;
-                budgetUpdate.User = user;
-            }
-            await _context.SaveChangesAsync();
-            return Ok(budgetUpdate);
-        }
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> UpdateBudget(int id, [FromBody] BudgetUpdateRequest request)
+        // {
+        //     var budgetUpdate = _context.Budget.FirstOrDefault(bud => bud.BudgetId == id);
+        //     if (budgetUpdate == null) return null;
+        //     if (request.TotalAmount != null) budgetUpdate.TotalAmount = request.TotalAmount;
+        //     if (request.BudgetName != null) budgetUpdate.BudgetName = request.BudgetName;
+        //     if (request.UserId != null)
+        //     {
+        //         var user = _context.User.FirstOrDefault(user => user.UserId == request.UserId);
+        //         if (user == null) return NotFound("User not found");
+        //         budgetUpdate.UserId = user.UserId;
+        //         budgetUpdate.User = user;
+        //     }
+        //     await _context.SaveChangesAsync();
+        //     return Ok(budgetUpdate);
+        // }
         
         [HttpPut("{id}/transactions")]
         public async Task<IActionResult> AddTransactionToBudget(int id, [FromBody] Transaction request)

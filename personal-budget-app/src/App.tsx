@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 import BudgetForm from './Components/BudgetForm';
 
 function App() {
-  const [budgets, setBudgets] = useState<Budget[]>();
-  const [openedBudgetIds, setOpenedBudgetIds] = useState<number[]>();
+  const [ budgets, setBudgets ] = useState<Budget[]>();
+  const [ openedBudgetIds, setOpenedBudgetIds ] = useState<number[]>();
   const navigate = useNavigate();
   
   const getBudgets = async () => {
