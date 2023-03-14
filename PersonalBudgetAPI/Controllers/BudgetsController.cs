@@ -37,6 +37,19 @@ namespace PersonalBudgetAPI.Controllers
           if (budget == null) return NotFound();
           return budget;
         }
+        
+        [HttpGet("/Budgets/User/{id}")]
+        public async Task<ActionResult<IEnumerable<Budget>>> GetBudgetByUser(int id)
+        {
+            if (_context.Budget == null) return NotFound();
+            var budgets = await _context.Budget
+                .Where(bud => bud.UserId == id)
+                .Include(b => b.User)
+                .Include(b => b.Transactions)
+                .ToListAsync();
+            if (budgets == null) return NotFound();
+            return Ok(budgets);
+        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBudget(int id, [FromBody] BudgetUpdateRequest request)

@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {Budget, User} from "./Types/Types";
 
 function App() {
+  const [budgets, setBudgets] = useState<Budget[]>();
+  
+  const getBudgets = async () => {
+    try {
+      const response = await fetch('https://localhost:7167/Budgets');
+      const json = await response.json();
+      setBudgets(json);
+    } catch (e :any) {
+      throw new Error('Budgets not found');
+    }
+  };
+
+  useEffect(() => {
+    getBudgets();
+  }, []);
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
     </div>
   );
 }
