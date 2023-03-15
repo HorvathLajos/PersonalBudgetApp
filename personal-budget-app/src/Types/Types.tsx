@@ -36,6 +36,7 @@ export type AddTransactionProps = {
 };
 export type AddBudgetProps = {
     AddBudget :(request :BudgetAddRequest) => void
+    ModBudget :(budgetId :number, request :BudgetAddRequest) => void
 };
 export type BudgetTransactionUpdateRequest = {
     transactionData : Date,

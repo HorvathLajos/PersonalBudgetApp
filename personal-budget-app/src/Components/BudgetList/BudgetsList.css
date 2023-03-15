@@ -4,6 +4,8 @@
 }
 .BudgetTableCellMain {
     font-size: 1em;
+    display: inline-block;
+    flex: 1;
     color: black;
     display: flex;
     justify-content: center;
@@ -11,7 +13,10 @@
 }
 .TableContainer {
     height: 100vh;
+    padding-top: 90px;
+    max-height: 100vh;
     min-width: 320px;
+    background-color: #D4F1F4;
 }
 .TableContainerTable {
     border-collapse: collapse;
@@ -22,6 +27,9 @@ img {
 }
 .MyPointer {
     cursor: grab;
+}
+.MarginOnRight{
+    margin-right: 10px;
 }
 
 

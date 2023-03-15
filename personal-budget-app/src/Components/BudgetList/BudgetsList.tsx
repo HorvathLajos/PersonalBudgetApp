@@ -1,12 +1,13 @@
 import { Box, Collapse, Paper, Table, TableBody, TableCell,
-    TableContainer, TableHead, TableRow } from "@mui/material";
+    TableContainer, TableHead, TableRow, withStyles } from "@mui/material";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Budget, BudgetListProps } from "../../Types/Types";
 import { Link } from "react-router-dom";
 import euro from "../../resources/euro.png"
 import Moment from 'moment';
-import BlockIcon from '@mui/icons-material/Block';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import './BudgetsList.css';
 
 
@@ -31,10 +32,10 @@ const BudgetsList = (properties :BudgetListProps) => {
             .map(trans => trans.transactionAmount)
             .reduce((sum, current) => sum + current, row.totalAmount);
         const colorInsert = 0 > rowOffsettedAmount ? 'red' : 'black';
-        const amountTableCellValue = `${row.totalAmount} / ${rowOffsettedAmount}`;
+        const amountTableCellValue = `${rowOffsettedAmount} / ${row.totalAmount}`;
         return (
             <React.Fragment>
-            <TableRow>
+            <TableRow sx={{backgroundColor: '#5885AF'}}>
                 <TableCell component="th" scope="row" className="MyPointer"
                 onClick={() => {
                     setOpen(!open); open 
@@ -47,7 +48,8 @@ const BudgetsList = (properties :BudgetListProps) => {
                     <p className="BudgetTableCell"><b>{amountTableCellValue}</b></p>
                 </TableCell>
                 <TableCell>
-                    <BlockIcon onClick={() => {properties.deleteBudget && properties.deleteBudget(row.budgetId)}}/>
+                    <Link to={"/budgets"} state={{ selectedBudget: row }}><ModeEditIcon color="primary" className="MyPointer MarginOnRight"/></Link>
+                    <DeleteForeverIcon color="error" className="MyPointer" onClick={() => {properties.deleteBudget && properties.deleteBudget(row.budgetId)}}/>
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -72,7 +74,7 @@ const BudgetsList = (properties :BudgetListProps) => {
                             </TableCell>
                             <TableCell><p className="BudgetTableCell">{transactionRow.transactionDesc}</p></TableCell>
                             <TableCell align="right"><p className="BudgetTableCell">{transactionRow.transactionAmount}</p> </TableCell>
-                            <TableCell align="right"><BlockIcon onClick={() => {properties.deleteTransaction && properties.deleteTransaction(transactionRow.transactionId)}}/></TableCell>
+                            <TableCell align="right"><DeleteForeverIcon color="error" className="MyPointer" onClick={() => {properties.deleteTransaction && properties.deleteTransaction(transactionRow.transactionId)}}/></TableCell>
                             </TableRow>
                         ))}
                         </TableBody>
@@ -84,17 +86,16 @@ const BudgetsList = (properties :BudgetListProps) => {
             </React.Fragment>
         );
     }
+  
 
     return (
+        <>
+        <Box sx={{ backgroundColor: "#41729F", position: 'fixed',top: 0,left: 0,width: '100%', display:'flex'}}>
+            <p className="BudgetTableCellMain"><b>Budget</b> <Link to={"/Budgets"}><img src={euro}/></Link></p>
+            <p className="BudgetTableCellMain"><b>State</b></p>
+        </Box>
         <TableContainer component={Paper} className="TableContainer">
-            <Table aria-label="collapsible table">
-            <TableHead>
-                <TableRow>
-                <TableCell><p className="BudgetTableCellMain"><b>Budget</b> <Link to={"/Budgets"}><img src={euro}/></Link></p></TableCell>
-                <TableCell align="right"><p className="BudgetTableCellMain"><b>State</b></p></TableCell>
-                <TableCell/>
-                </TableRow>
-            </TableHead>
+            <Table stickyHeader aria-label="collapsible table">
             <TableBody>
                 {budgets?.map((row) => (
                 <Row key={row.budgetId} row={row} />
@@ -102,6 +103,7 @@ const BudgetsList = (properties :BudgetListProps) => {
             </TableBody>
             </Table>
         </TableContainer>
+        </>
     );
 }
 
