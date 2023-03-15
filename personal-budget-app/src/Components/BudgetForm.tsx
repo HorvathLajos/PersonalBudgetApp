@@ -1,10 +1,12 @@
-import { Box, Button, FormControl, FormHelperText, InputAdornment, OutlinedInput } from "@mui/material";
+import { Box, Button, FormControl, FormHelperText,
+  InputAdornment, OutlinedInput } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AddBudgetProps, BudgetAddRequest } from "../Types/Types"
 
 const BudgetForm = (props :AddBudgetProps) => {
   let { state } = useLocation();
+
   const selectedId = state && state.selectedBudget && state.selectedBudget.budgetId;
   const selectedName = state && state.selectedBudget && state.selectedBudget.budgetName;
   const selectedAmount = state && state.selectedBudget && state.selectedBudget.totalAmount;
@@ -14,9 +16,9 @@ const BudgetForm = (props :AddBudgetProps) => {
 
   const onNameChange = (e: any) => setbudgetName(e.target.value);
   const onAmountChange = (e: any) => setAmount(e.target.value);
-  
   const handleSubmit = () => {
     let date = new Date();
+    // Time was off by an hour.
     date.setTime( date.getTime() - new Date().getTimezoneOffset()*60*1000 );
     let budget :BudgetAddRequest = {
         budgetName :budgetName,
@@ -30,10 +32,11 @@ const BudgetForm = (props :AddBudgetProps) => {
     return props.AddBudget(budget);
   }
   const buttonValue = selectedId == null ? "Add new budget" : "Modify budget";
+  
   return (
       <Box
-      sx={{ backgroundColor: "#D4F1F4", height: '100vh'}}
-      textAlign="center">
+        sx={{ backgroundColor: "#D4F1F4", height: '100vh'}}
+        textAlign="center">
         <FormControl sx={{ m: 1, width: '90%' }} variant="outlined">
           <FormHelperText id="outlined-name-helper-text">Budget name</FormHelperText>
           <OutlinedInput
@@ -41,7 +44,7 @@ const BudgetForm = (props :AddBudgetProps) => {
             value={budgetName == null ? "" : budgetName}
             aria-describedby="outlined-name-helper-text"
             inputProps={{
-              'aria-label': 'Name',
+              'aria-label': 'Name'
             }}
           />
         </FormControl>
@@ -54,12 +57,16 @@ const BudgetForm = (props :AddBudgetProps) => {
             endAdornment={<InputAdornment position="end">€</InputAdornment>}
             aria-describedby="outlined-amount-helper-text"
             inputProps={{
-              'aria-label': 'Amount',
+              'aria-label': 'Amount'
             }}
           />
         </FormControl>
-
-        <Button sx={{ display: "block", margin: "auto" }} onClick={handleSubmit}>{buttonValue}</Button>
+        <Button 
+          sx={{ display: "block", margin: "auto" }} 
+          onClick={handleSubmit}
+        >
+          {buttonValue}
+        </Button>
       </Box>
   );
 };

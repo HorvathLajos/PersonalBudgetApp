@@ -28,8 +28,9 @@ const TransactionForm = (props :AddTransactionProps) => {
 
   return (
       <Box
-      sx={{ backgroundColor: "#D4F1F4", height: '100vh'}}
-      textAlign="center">
+        sx={{ backgroundColor: "#D4F1F4", height: '100vh'}}
+        textAlign="center"
+      >
         <FormControl sx={{ m: 1, width: '90%' }} variant="outlined">
           <ToggleButtonGroup
             color="primary"
@@ -64,7 +65,6 @@ const TransactionForm = (props :AddTransactionProps) => {
             }}
           />
         </FormControl>
-
         <Button sx={{ display: "block", margin: "auto" }} onClick={handleSubmit}>Add new transaction</Button>
       </Box>
   );

@@ -6,7 +6,8 @@ import TransactionForm from './Components/TransactionForm';
 import { Budget, BudgetAddRequest, BudgetTransactionUpdateRequest } from "./Types/Types";
 import { useNavigate } from "react-router-dom";
 import BudgetForm from './Components/BudgetForm';
-import { StyledEngineProvider } from '@mui/material/styles';
+import { Navigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 function App() {
   const [ budgets, setBudgets ] = useState<Budget[]>();
@@ -15,6 +16,7 @@ function App() {
   
   const getBudgets = async () => {
     try {
+      // Gets all budgets for user 1, hardcoded for now
       const response = await fetch('https://localhost:7167/Budgets/User/1');
       const json = await response.json();
       setBudgets(json);
@@ -22,13 +24,11 @@ function App() {
       throw new Error('Budgets not found');
     }
   };
-
   useEffect(() => {
     getBudgets();
   }, []);
 
   async function AddTransaction(budgetId :number, request :BudgetTransactionUpdateRequest) {
- 
     const saveTransaction = async () => {
       try {
         const requestOptions = {
@@ -49,7 +49,6 @@ function App() {
   }
 
   async function DeleteTransaction(transactionId :number) {
- 
     const delTransaction = async () => {
       try {
         const requestOptions = {
@@ -66,7 +65,6 @@ function App() {
   }
 
   async function AddBudget(budget :BudgetAddRequest) {
- 
     const AddABudget = async () => {
       try {
         const requestOptions = {
@@ -85,7 +83,6 @@ function App() {
   }
 
   async function DeleteBudget(budgetId :number) {
- 
     const delBudget = async () => {
       try {
         const requestOptions = {
@@ -103,7 +100,6 @@ function App() {
   }
 
   async function ModifyBudget(budgetId :number, budget :BudgetAddRequest) {
- 
     const modBudget = async () => {
       try {
         const requestOptions = {
@@ -122,9 +118,9 @@ function App() {
   }
   
   return (
-    <div className="App">
-      <StyledEngineProvider injectFirst>
+    <Box className="App">
         <Routes>
+          <Route path="/" element={<Navigate replace to="/dashboard" />} />
           <Route path="/dashboard" element={<BudgetsList 
           budgets={budgets?.sort((a, b) => a.budgetName.localeCompare(b.budgetName))}
           openedBudgetIds={openedBudgetIds}
@@ -135,8 +131,7 @@ function App() {
           <Route path="/transactions" element={<TransactionForm AddTransaction={AddTransaction}/>}></Route>
           <Route path="/budgets" element={<BudgetForm AddBudget={AddBudget} ModBudget={ModifyBudget}/>}></Route>
         </Routes>
-        </StyledEngineProvider>
-    </div>
+    </Box>
   );
 }
 

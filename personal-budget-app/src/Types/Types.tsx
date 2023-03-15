@@ -1,8 +1,8 @@
-export type User = {
-    userId : number,
-    userName :string,
-    userPassword :string
-};
+// export type User = {
+//     userId : number,
+//     userName :string,
+//     userPassword :string
+// };
 export type Transaction = {
     transactionId : number,
     transactionData : Date,

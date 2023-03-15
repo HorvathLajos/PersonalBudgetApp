@@ -3,7 +3,7 @@
     text-align: center;
 }
 .BudgetTableCellMain {
-    font-size: 1em;
+    font-size: 1.4em;
     display: inline-block;
     flex: 1;
     color: black;
@@ -37,15 +37,9 @@ img {
     .BudgetTableCell {
         font-size: 1em;
     }
-    .BudgetTableCellMain {
-        font-size: 1.2em;
-    }
 }
 @media only screen and (min-width: 600px) {
     .BudgetTableCell {
         font-size: 1.2em;
-    }
-    .BudgetTableCellMain {
-        font-size: 1.4em;
     }
 }
