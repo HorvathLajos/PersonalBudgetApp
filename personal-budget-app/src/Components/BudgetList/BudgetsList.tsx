@@ -62,7 +62,7 @@ const BudgetsList = (properties :BudgetListProps) => {
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <Box sx={{ margin: 1 }}>
-                        <p className="BudgetTableCellMain">Transactions <Link to={"/Transactions"} state={{ selectedBudget: row }}><img src={euro}/></Link></p>
+                        <p className="BudgetTableCellMain">Add transactions: <Link to={"/Transactions"} state={{ selectedBudget: row }}><img src={euro}/></Link></p>
                     <Table size="small" aria-label="transactions">
                         <TableHead>
                         <TableRow>
@@ -104,10 +104,9 @@ const BudgetsList = (properties :BudgetListProps) => {
     return (
         <>
         <Box sx={{ backgroundColor: "#41729F", position: 'fixed',top: 0,left: 0,width: '100%', display:'flex'}}>
-            <p className="BudgetTableCellMain"><b>Budget</b> 
+            <p className="BudgetTableCellMain"><b>Add budget:</b> 
                 <Link to={"/Budgets"}><img src={euro}/></Link>
             </p>
-            <p className="BudgetTableCellMain"><b>State</b></p>
         </Box>
         <TableContainer component={Paper} className="TableContainer">
             <Table stickyHeader aria-label="collapsible table">
